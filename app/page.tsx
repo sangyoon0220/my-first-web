@@ -1,58 +1,34 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <>
-      <header>
-        <div>
-          <h1>사이트 제목</h1>
-          <nav>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </nav>
+    <section className="py-8 md:py-14">
+      <div className="bg-white/80 border-2 border-lime-300 rounded-2xl shadow-lg p-8 md:p-12 text-blue-950">
+        <span className="inline-block mb-4 px-3 py-1 rounded-full bg-lime-400 text-blue-950 text-xs font-bold tracking-wide">
+          LIFE LOG
+        </span>
+        <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4">
+          공인재 이상윤의 생존일기
+        </h1>
+        <p className="text-base md:text-lg text-blue-900/85 max-w-3xl">
+          이상윤이 공공인재빅데이터융합학부에서 살아남는 과정을 써내려가는 공간입니다.
+        </p>
+
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <Link
+            href="/posts"
+            className="px-5 py-2.5 rounded-lg bg-blue-950 text-lime-100 font-semibold hover:bg-blue-900 transition-colors"
+          >
+            글 보러 가기
+          </Link>
+          <Link
+            href="/posts/new"
+            className="px-5 py-2.5 rounded-lg bg-lime-400 text-blue-950 font-semibold hover:bg-lime-300 transition-colors"
+          >
+            새 글 쓰기
+          </Link>
         </div>
-      </header>
-
-      <main className="max-w-4xl mx-auto p-4">
-        <section aria-labelledby="latest-posts">
-          <h2 id="latest-posts">최신 게시글</h2>
-
-          <article className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition mb-4">
-            <h3 className="text-lg font-bold">게시글 제목 1</h3>
-            <p className="text-gray-600">게시글 1의 내용 미리보기입니다. 이곳에는 간단한 요약이 들어갑니다.</p>
-            <div>
-              <span>작성자: 이상윤</span>
-              <span> · </span>
-              <time className="text-sm text-gray-400" dateTime="2026-03-30">2026-03-30</time>
-            </div>
-          </article>
-
-          <article className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition mb-4">
-            <h3 className="text-lg font-bold">게시글 제목 2</h3>
-            <p className="text-gray-600">게시글 2의 내용 미리보기입니다. 이곳에는 간단한 요약이 들어갑니다.</p>
-            <div>
-              <span>작성자: 이상윤</span>
-              <span> · </span>
-              <time className="text-sm text-gray-400" dateTime="2026-03-29">2026-03-29</time>
-            </div>
-          </article>
-
-          <article className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
-            <h3 className="text-lg font-bold">게시글 제목 3</h3>
-            <p className="text-gray-600">게시글 3의 내용 미리보기입니다. 이곳에는 간단한 요약이 들어갑니다.</p>
-            <div>
-              <span>작성자: 이상윤</span>
-              <span> · </span>
-              <time className="text-sm text-gray-400" dateTime="2026-03-28">2026-03-28</time>
-            </div>
-          </article>
-        </section>
-      </main>
-
-      <footer>
-        <p>© 2026 사이트 제목</p>
-      </footer>
-    </>
+      </div>
+    </section>
   );
 }
