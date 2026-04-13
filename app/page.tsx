@@ -11,7 +11,7 @@ export default function Home() {
           공인재 이상윤의 생존일기
         </h1>
         <p className="text-base md:text-lg text-blue-900/85 max-w-3xl">
-          이상윤이 공공인재빅데이터융합학부에서 살아남는 과정을 써내려가는 공간입니다.
+          이상윤이 공빅에서 살아남는 과정을 기록하는 공간입니다.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
