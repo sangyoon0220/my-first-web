@@ -1,9 +1,18 @@
 "use client";
 
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<section className="max-w-md mx-auto py-10" />}>
+      <AdminLoginForm />
+    </Suspense>
+  );
+}
+
+function AdminLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/posts";

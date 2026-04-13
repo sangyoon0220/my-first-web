@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function AdminSessionButton() {
+  const pathname = usePathname();
   const [isAdmin, setIsAdmin] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -39,7 +41,7 @@ export default function AdminSessionButton() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {
