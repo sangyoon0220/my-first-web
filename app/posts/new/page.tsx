@@ -2,16 +2,40 @@
 
 import type { Post } from "@/lib/posts";
 import { createLocalPostId, getLocalPosts, saveLocalPosts } from "@/lib/local-posts";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function NewPostPage() {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [warning, setWarning] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const checkAdminSession = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/admin/session", { cache: "no-store" });
+
+      if (!response.ok) {
+        return false;
+      }
+
+      const data = (await response.json()) as { isAdmin?: boolean };
+      return Boolean(data.isAdmin);
+    } catch {
+      return false;
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const isAdmin = await checkAdminSession();
+
+    if (!isAdmin) {
+      router.push("/admin/login?redirect=/posts/new");
+      return;
+    }
 
     if (!title.trim()) {
       setWarning("제목을 입력해주세요.");
@@ -35,6 +59,9 @@ export default function NewPostPage() {
 
     setTitle("");
     setContent("");
+
+    router.push("/posts");
+    router.refresh();
   };
 
   return (

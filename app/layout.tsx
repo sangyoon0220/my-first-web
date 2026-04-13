@@ -1,4 +1,5 @@
 import "./globals.css";
+import AdminSessionButton from "./admin-session-button";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -36,6 +37,7 @@ export default function RootLayout({
               >
                 새 글 쓰기
               </Link>
+              <AdminSessionButton />
             </div>
           </nav>
         </header>
