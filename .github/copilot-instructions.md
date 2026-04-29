@@ -1,17 +1,47 @@
-# Copilot Instructions
+# Copilot Instructions — my-first-web
 
-- Tech Stack:
-  - Next.js: 16.2.1 (App Router ONLY)
-  - Tailwind CSS: ^4
+## Project Overview
 
-- Coding Conventions:
-  - 기본적으로 Server Component 사용
-  - 스타일은 Tailwind CSS만 사용 (CSS 모듈/글로벌 CSS 사용 자제)
+- This project uses Next.js 16.2.1 with the App Router only.
+- Use React 19.2.4, TypeScript, Tailwind CSS 4, and shadcn/ui.
+- Treat `AGENT.md` and `AGENTS.md` as the shared source of truth for workflow rules.
 
-- Known AI Mistakes / Rules:
-  - `next/router` 금지 — `next/navigation` 사용
-  - Pages Router 사용 금지 (App Router만 허용)
-  - `params` 사용 시 반드시 `await` 필요 (비동기 데이터/params 처리에서 누락 주의)
+## General Rules
 
---
-이 파일은 레포의 GitHub Copilot 지침용입니다. Agent 모드에서 이 규칙을 따르세요.
+- Prefer Server Components by default.
+- Add `"use client"` only when interactivity or browser APIs are required.
+- Use `next/navigation` instead of `next/router`.
+- Keep route files inside `app/`.
+- Write simple, easy-to-verify components.
+
+## Styling Rules
+
+- Use Tailwind CSS utilities for layout and spacing.
+- Use the CSS variables defined in `app/globals.css` for color and radius.
+- Do not hardcode Tailwind palette colors when a design token exists.
+- Keep main content width around `max-w-4xl mx-auto` unless the page needs a wider layout.
+
+## Design Tokens
+
+- Background: `bg-background`
+- Foreground text: `text-foreground`
+- Primary actions: `bg-primary` and `text-primary-foreground`
+- Borders and inputs: `border-border` and `border-input`
+- Cards: `bg-card`, `text-card-foreground`, `rounded-lg`, `shadow-sm`
+- Spacing: use `space-y-6` for page sections and `p-6` for card content when possible
+
+## Component Rules
+
+- Prefer shadcn/ui components from `components/ui/`.
+- Use `Button`, `Card`, `Input`, and `Dialog` before building custom controls.
+- Put reusable custom components in the `components/` root.
+- Verify the actual import path before using a component.
+
+## Known AI Mistakes
+
+- Do not use `pages/` router files.
+- Do not use `next/router`.
+- Do not invent shadcn/ui component paths that do not exist.
+- Do not use raw color classes like `bg-blue-500` when a token-based class is available.
+- Do not add client components everywhere; keep server rendering as the default.
+- The current admin-auth flow uses `/admin/login` and `/api/admin/session`; the blog design docs also plan `/login`, `/signup`, and `/mypage` routes.
