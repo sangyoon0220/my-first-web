@@ -45,3 +45,14 @@
 - Do not use raw color classes like `bg-blue-500` when a token-based class is available.
 - Do not add client components everywhere; keep server rendering as the default.
 - The current admin-auth flow uses `/admin/login` and `/api/admin/session`; the blog design docs also plan `/login`, `/signup`, and `/mypage` routes.
+## Chapter 9: Supabase Authentication Rules (Ch9)
+
+- Use **email/password authentication only** — no social login (Google, Kakao, Naver).
+- Use `signInWithPassword()` for login — do NOT use the deprecated `auth.signIn()`.
+- Use `signUp()` for user registration with metadata: `options: { data: { name } }`.
+- Use `signOut()` for logout.
+- Use `@supabase/ssr` for session management with Next.js App Router.
+- Use `lib/supabase/client.ts` for browser-side Supabase client creation.
+- Never expose `service_role` keys or server-only keys to the client.
+- Middleware (`middleware.ts`) protects public routes — use it for `/posts/new` redirect to `/login`.
+- Authorization (who can edit/delete) is handled in Ch11 RLS, not in Ch9 authentication.

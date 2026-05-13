@@ -1,27 +1,58 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { isAdminRequest } from "@/lib/admin-auth";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { NextRequest, NextResponse } from "next/server";
 
-const PROTECTED_PATHS = ["/posts/new", "/posts/edit"];
+export async function middleware(request: NextRequest) {
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
 
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const isProtected = PROTECTED_PATHS.some(
-    (path) => pathname === path || pathname.startsWith(`${path}/`),
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value;
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          response.cookies.set({
+            name,
+            value,
+            ...options,
+          });
+        },
+        remove(name: string, options: CookieOptions) {
+          response.cookies.set({
+            name,
+            value: "",
+            ...options,
+          });
+        },
+      },
+    }
   );
 
-  if (!isProtected) {
-    return NextResponse.next();
+  // 현재 사용자 확인
+  const { data } = await supabase.auth.getUser();
+
+  // 보호된 경로 정의
+  const protectedPaths = ["/posts/new", "/posts/edit"];
+  const isProtected = protectedPaths.some(
+    (path) =>
+      request.nextUrl.pathname === path ||
+      request.nextUrl.pathname.startsWith(`${path}/`)
+  );
+
+  // 비로그인 사용자가 보호된 경로에 접근하려면 로그인 페이지로 리다이렉트
+  if (isProtected && !data.user) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirect", request.nextUrl.pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
-  if (isAdminRequest(request)) {
-    return NextResponse.next();
-  }
-
-  const loginUrl = new URL("/admin/login", request.url);
-  loginUrl.searchParams.set("redirect", pathname);
-
-  return NextResponse.redirect(loginUrl);
+  return response;
 }
 
 export const config = {

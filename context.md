@@ -2,10 +2,10 @@
 
 ## 현재 상태
 
-- 마지막 작업일: 2026-04-29
-- Ch7 과제 제출용 설계 문서를 정리하는 중이다.
-- 완료된 작업: `copilot-instructions.md`, `ARCHITECTURE.md`, `todo.md`, 와이어프레임 초안 정리
-- 진행 중: GitHub 저장소 제출 전 최종 점검
+- 마지막 작업일: 2026-05-13
+- **현재 진행**: Ch9 Supabase 이메일/비밀번호 인증 구현
+- 완료된 작업: Ch7 설계 문서, Ch8 Supabase 프로젝트 연결
+- 진행 중: 로그인/회원가입/로그아웃 인증 플로우 구현
 
 ## 기술 결정 사항
 
@@ -13,9 +13,16 @@
 - 언어/런타임: TypeScript + React 19.2.4
 - 스타일: Tailwind CSS 4 + `app/globals.css`의 CSS 변수
 - UI 컴포넌트: shadcn/ui (`components/ui/`)
-- 인증 흐름: 현재 구현 기준으로 `/admin/login`과 `/api/admin/session`을 사용
-- 설계 기준: 블로그 확장용 경로로 `/login`, `/signup`, `/mypage`를 함께 문서화
-- 데이터 모델: `users`와 `posts` 테이블, UUID 기반 기본 키와 1:N 관계를 기준으로 정리
+- **인증 방식**: Supabase 이메일/비밀번호 인증 (소셜 로그인 제외)
+  - `signInWithPassword()` 로그인
+  - `signUp()` 회원가입
+  - `signOut()` 로그아웃
+- **세션 관리**: @supabase/ssr + 쿠키 기반 (App Router)
+- **Supabase 연결**: 
+  - 프로젝트 참조 ID: `vetapmsgbewwvvelzpwe`
+  - 환경변수: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- 설계 기준: 블로그 경로는 `/login`, `/signup`, `/mypage`
+- 데이터 모델: `users`와 `posts` 테이블, UUID 기반 기본 키
 
 ## 해결된 이슈
 
