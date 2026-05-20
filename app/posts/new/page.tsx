@@ -56,7 +56,6 @@ export default function NewPostPage() {
         body: JSON.stringify({
           title: title.trim(),
           content: content.trim(),
-          user_id: user.id,
         }),
       });
 

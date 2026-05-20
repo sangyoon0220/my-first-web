@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 export async function POST(request: NextRequest) {
-  const { title, content, user_id } = await request.json();
+  const { title, content } = await request.json();
 
   // 입력값 검증
-  if (!title || !content || !user_id) {
+  if (!title || !content) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -38,8 +38,19 @@ export async function POST(request: NextRequest) {
   );
 
   try {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const user_id = user.id;
+
     // profiles 테이블에 사용자 정보가 있는지 확인
-    const { data: profileExists, error: profileCheckError } = await supabase
+    const { data: profileExists } = await supabase
       .from("profiles")
       .select("id")
       .eq("id", user_id)

@@ -16,6 +16,7 @@ type PostDetailClientProps = {
 export default function PostDetailClient({ post }: PostDetailClientProps) {
   const router = useRouter();
   const { user } = useAuth();
+  const isOwner = !!user && user.id === post.user_id;
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -58,7 +59,7 @@ export default function PostDetailClient({ post }: PostDetailClientProps) {
           <Link href="/posts" className="inline-block text-sm text-blue-700 hover:underline">
             목록으로 돌아가기
           </Link>
-          {user && (
+          {isOwner && (
             <>
               <Link
                 href={`/posts/edit/${post.id}`}

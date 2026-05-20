@@ -28,6 +28,11 @@ export default function Header() {
           </Link>
 
           <nav className="flex items-center gap-3">
+            <Link href="/posts">
+              <Button variant="outline" size="sm" className="bg-lime-300 text-blue-950 hover:bg-lime-200">
+                자유게시판
+              </Button>
+            </Link>
             {loading ? (
               <span className="text-sm text-lime-200">로딩 중...</span>
             ) : user ? (

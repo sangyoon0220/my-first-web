@@ -113,21 +113,20 @@ export async function updatePost(
   title: string,
   content: string
 ): Promise<Post | null> {
-  const supabase = createClient();
-
   try {
-    const { data, error } = await supabase
-      .from("posts")
-      .update({ title, content })
-      .eq("id", id)
-      .select()
-      .single();
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, content }),
+    });
 
-    if (error) {
-      console.error("updatePost error:", error);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("updatePost error:", errorData);
       return null;
     }
 
+    const data = await response.json();
     return data || null;
   } catch (err) {
     console.error("updatePost exception:", err);
@@ -140,13 +139,14 @@ export async function updatePost(
  * @param id 글 ID
  */
 export async function deletePost(id: string): Promise<boolean> {
-  const supabase = createClient();
-
   try {
-    const { error } = await supabase.from("posts").delete().eq("id", id);
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+    });
 
-    if (error) {
-      console.error("deletePost error:", error);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("deletePost error:", errorData);
       return false;
     }
 

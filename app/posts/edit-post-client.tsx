@@ -2,6 +2,7 @@
 
 import { updatePost } from "@/lib/posts";
 import type { Post } from "@/lib/posts";
+import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,10 +12,32 @@ type EditPostClientProps = {
 
 export default function EditPostClient({ post }: EditPostClientProps) {
   const router = useRouter();
+  const { user, loading } = useAuth();
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.content);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (loading) {
+    return (
+      <section className="max-w-3xl mx-auto py-8">
+        <div className="rounded-2xl border-2 border-lime-300 bg-white p-6 md:p-8 shadow-md text-center">
+          <p className="text-blue-900">로딩 중...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (!user || user.id !== post.user_id) {
+    return (
+      <section className="max-w-3xl mx-auto py-8">
+        <div className="rounded-2xl border-2 border-red-300 bg-red-50 p-6 md:p-8 shadow-md">
+          <h1 className="text-2xl font-bold text-red-900 mb-2">접근 불가</h1>
+          <p className="text-red-800 mb-4">작성자 본인만 수정할 수 있습니다.</p>
+        </div>
+      </section>
+    );
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -74,7 +74,7 @@ export default function PostsClient({ initialPosts }: PostsClientProps) {
   return (
     <div className="max-w-5xl mx-auto p-6">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl md:text-3xl font-black text-blue-950">블로그</h1>
+        <h1 className="text-2xl md:text-3xl font-black text-blue-950">자유게시판</h1>
       </div>
 
       <div className="mb-6 rounded-xl border border-lime-300 bg-lime-50 p-4">
@@ -93,7 +93,7 @@ export default function PostsClient({ initialPosts }: PostsClientProps) {
                 <p className="text-sm text-blue-900/70">{formatDate(post.created_at)}</p>
                 <p className="mt-3 text-blue-900/85 line-clamp-3">{post.content}</p>
               </Link>
-              {user && (
+              {user && user.id === post.user_id && (
                 <button
                   onClick={(e) => handleDeleteClick(post.id, e)}
                   className="text-red-500 hover:text-red-700 font-semibold text-sm px-2 py-1 rounded hover:bg-red-50 transition"
