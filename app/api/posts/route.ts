@@ -38,6 +38,25 @@ export async function POST(request: NextRequest) {
   );
 
   try {
+    // profiles 테이블에 사용자 정보가 있는지 확인
+    const { data: profileExists, error: profileCheckError } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("id", user_id)
+      .single();
+
+    // 프로필이 없으면 생성
+    if (!profileExists) {
+      const { error: profileCreateError } = await supabase
+        .from("profiles")
+        .insert([{ id: user_id }]);
+
+      if (profileCreateError) {
+        console.error("createProfile error:", profileCreateError);
+        // 프로필 생성 실패했지만 계속 진행 (이미 있을 수도 있음)
+      }
+    }
+
     // posts 테이블에 새 글 삽입
     const { data, error } = await supabase
       .from("posts")
