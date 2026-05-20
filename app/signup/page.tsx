@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,22 +16,6 @@ export default function SignupPage() {
   const [verified, setVerified] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [cooldown, setCooldown] = useState(0);
-
-  // cooldown 타이머 관리
-  useEffect(() => {
-    if (cooldown <= 0) return;
-    const id = setInterval(() => {
-      setCooldown((c) => {
-        if (c <= 1) {
-          clearInterval(id);
-          return 0;
-        }
-        return c - 1;
-      });
-    }, 1000);
-    return () => clearInterval(id);
-  }, [cooldown]);
 
   async function requestCode() {
     setError(null);
@@ -49,7 +33,6 @@ export default function SignupPage() {
       if (!sendSuccess) {
         if (status === 429 || /rate limit/i.test(sendError ?? "")) {
           setError("요청이 너무 많습니다. 5분 후 다시 시도하거나 다른 이메일을 사용해보세요.");
-          setCooldown(300);
           return;
         }
 
@@ -59,7 +42,6 @@ export default function SignupPage() {
 
       setStep("code");
       setCode("");
-      setCooldown(60);
       setMessage("인증 코드를 이메일로 보냈습니다. 받은 코드를 입력하세요.");
     } finally {
       setLoading(false);
@@ -88,7 +70,6 @@ export default function SignupPage() {
       if (verifyError) {
         if (status === 429 || /rate limit/i.test(verifyError)) {
           setError("요청이 너무 많습니다. 잠시 후 다시 시도해주세요.");
-          setCooldown(120);
           return;
         }
 
@@ -137,12 +118,12 @@ export default function SignupPage() {
                 placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                disabled={loading || cooldown > 0}
+                disabled={loading}
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading || cooldown > 0}>
-              {loading ? "인증 코드 전송 중..." : cooldown > 0 ? `재시도 ${cooldown}s 후` : "인증 코드 보내기"}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "인증 코드 전송 중..." : "인증 코드 보내기"}
             </Button>
           </form>
         )}
@@ -167,12 +148,12 @@ export default function SignupPage() {
                 placeholder="6자리 코드"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                disabled={loading || cooldown > 0}
+                disabled={loading}
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading || cooldown > 0}>
-              {loading ? "확인 중..." : cooldown > 0 ? `재시도 ${cooldown}s 후` : "코드 확인"}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "확인 중..." : "코드 확인"}
             </Button>
 
             <button
@@ -181,7 +162,7 @@ export default function SignupPage() {
               onClick={() => {
                 void requestCode();
               }}
-              disabled={loading || cooldown > 0}
+              disabled={loading}
             >
               코드 다시 보내기
             </button>
