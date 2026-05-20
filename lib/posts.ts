@@ -144,6 +144,11 @@ export async function deletePost(id: string): Promise<boolean> {
       method: "DELETE",
     });
 
+    if (response.status === 404) {
+      // 이미 삭제된 글이라면 UI에서는 삭제 성공으로 처리
+      return true;
+    }
+
     if (!response.ok) {
       const errorData = await response.json();
       console.error("deletePost error:", errorData);
