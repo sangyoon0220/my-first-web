@@ -15,3 +15,4 @@ create table posts (
   content text not null,
   created_at timestamptz default now()
 );
+
