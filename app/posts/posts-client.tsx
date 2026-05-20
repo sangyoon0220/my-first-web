@@ -80,6 +80,15 @@ export default function PostsClient({ initialPosts }: PostsClientProps) {
       <div className="mb-6 rounded-xl border border-lime-300 bg-lime-50 p-4">
         <SearchBar value={keyword} onChange={setKeyword} />
       </div>
+      {user && (
+        <div className="mb-6 flex justify-end">
+          <Link href="/posts/new">
+            <Button variant="outline" size="sm" className="bg-lime-300 text-blue-950 hover:bg-lime-200">
+              글쓰기
+            </Button>
+          </Link>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-4">
         {filteredPosts.map((post) => (
