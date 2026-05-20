@@ -2,24 +2,15 @@
 
 ## 현재 상태
 
-- 마지막 업데이트: 2026-05-18
-- **현재 진행**: Ch10 게시글 CRUD 구현 시작 전 기준 문서 정비
-- 완료된 작업: Ch7 설계 문서, Ch8 Supabase 프로젝트 연결, Ch9 이메일 OTP 인증
-- **다음**: Ch10 게시글 CRUD (생성, 읽기, 수정, 삭제) + 보호 라우트
 
 ## 기술 결정 사항
-
 - 프레임워크: Next.js 16.2.1 App Router only (pages/ 금지)
 - 언어/런타임: TypeScript + React 19.2.4
 - 스타일: Tailwind CSS 4 + `app/globals.css`의 CSS 변수
 - UI 컴포넌트: shadcn/ui (`components/ui/`)
 
 ### Ch8: Supabase 연결 ✅
-- Supabase 프로젝트 참조 ID: `vetapmsgbewwvvelzpwe`
-- 환경변수: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- 브라우저 클라이언트: `lib/supabase/client.ts` 사용
-- 패키지: @supabase/ssr 0.5.2 (쿠키 기반 세션), @supabase/supabase-js (실제: 2.105.4, 교재: 2.47.12)
-
+- posts 테이블 RLS 적용: `supabase/migrations/20260520093000_add_posts_rls.sql` 추가 (SELECT: 모두, INSERT/UPDATE/DELETE: 작성자 제약)
 ### Ch9: 이메일 OTP 인증 ✅
 - **인증 방식**: 이메일 코드 기반 (password signup 제외)
   - `sendEmailCode(email)` - OTP 코드 발송

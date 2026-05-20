@@ -239,6 +239,12 @@ export async function updatePost(
 - UI: 글 상세에서 "수정" 버튼은 로그인한 사용자만 표시 (현재)
 - **Ch11에서 RLS**: 본인 글만 수정 가능하도록 DB 제약
 
+## 보안: RLS 적용 (Ch11)
+
+- `posts` 테이블에 대해 Ch11 RLS 정책을 적용하여 DB가 작성·수정·삭제 권한을 직접 강제합니다.
+- 마이그레이션 파일: `supabase/migrations/20260520093000_add_posts_rls.sql`
+- 규칙 요약: SELECT는 공개, INSERT/UPDATE/DELETE는 `auth.uid() = user_id`로 제한
+
 ### 삭제 (D) - 로그인 필수 + 본인 글 (Ch11 RLS)
 
 **함수 위치**: `lib/posts.ts`

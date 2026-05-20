@@ -98,3 +98,10 @@
 - **Ch9**: ✅ 100% 완료 (인증 시스템 완성)
 - **Ch10**: 준비 중 (문서 정비 진행 중, 코드 미작성)
 - **Ch11**: 대기 중 (RLS - 행 수준 보안)
+ 
+## Ch11: RLS 진행 상태
+
+- [x] posts RLS 마이그레이션 파일 생성: `supabase/migrations/20260520093000_add_posts_rls.sql`
+- [ ] Supabase에 마이그레이션 적용 (`npx supabase db push`)
+- [ ] 브라우저 우회 테스트 (비로그인, 사용자 A/B)
+- [ ] 문서 업데이트 반영 커밋
