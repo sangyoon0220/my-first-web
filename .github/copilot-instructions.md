@@ -56,3 +56,62 @@
 - Never expose `service_role` keys or server-only keys to the client.
 - Middleware (`middleware.ts`) protects public routes — use it for `/posts/new` redirect to `/login`.
 - Authorization (who can edit/delete) is handled in Ch11 RLS, not in Ch9 authentication.
+
+## Chapter 10: Posts CRUD Rules (Ch10)
+
+### Data Schema (Ch8 Basis)
+
+- Posts table schema: `id`, `user_id`, `title`, `content`, `created_at`
+- User reference: `posts.user_id` → `profiles.id`
+- Never add columns like `summary`, `status`, `updated_at` without explicit request (schema stability)
+
+### Read Operations (R) — No Auth Required
+
+- `getPosts()`: Fetch all posts with no login check — use as server component
+- `getPostById(id)`: Fetch single post with no login check — use as server component
+- Pages: `app/posts/page.tsx` and `app/posts/[id]/page.tsx` are Server Components (default)
+- No `"use client"` directive for read-only pages
+
+### Create Operations (C) — Login Required
+
+- `createPost(title, content, user_id)`: Server action or API route `POST /api/posts`
+- Page: `app/posts/new/page.tsx` (protected by middleware)
+- Middleware matcher: `/posts/new` and `/posts/new/:path*`
+- Extract `user_id` from `useAuth()` or session context before insert
+- Redirect to `/posts/[id]` on success
+
+### Update Operations (U) — Login Required + UX Only (Auth), RLS Later (Ch11)
+
+- `updatePost(id, title, content)`: Server action or API route `PATCH /api/posts/[id]`
+- Page: `app/posts/edit/[id]/page.tsx` (protected by middleware)
+- Middleware matcher: `/posts/edit/:path*`
+- UI: Show "Edit" button only if `user !== null` (UX check, not security)
+- Do NOT validate `user_id` match in Ch10 code — Ch11 RLS will enforce it
+- Redirect to `/posts/[id]` on success
+
+### Delete Operations (D) — Login Required + UX Only (Auth), RLS Later (Ch11)
+
+- `deletePost(id)`: Server action or API route `DELETE /api/posts/[id]`
+- UI: Show "Delete" button only if `user !== null` and render Dialog for confirmation
+- Do NOT validate `user_id` match in Ch10 code — Ch11 RLS will enforce it
+- Redirect to `/posts` on success
+
+### API Routes vs Server Actions
+
+- Prefer Server Actions (`"use server"`) for simplicity when form submission is the trigger
+- Use API routes (`/api/posts`, `/api/posts/[id]`) if client-side fetch is needed (e.g., AJAX)
+- Both are acceptable; choose based on component design
+
+### TypeScript & Type Safety
+
+- Define `interface Post { id: string; user_id: string; title: string; content: string; created_at: string; }`
+- Export from `lib/posts.ts` or a `types.ts` file
+- All Supabase query results should be typed with `as Post` if needed
+
+### Common Pitfalls
+
+- Do NOT use `getUser()` in server components — use `getSession()` or server-only auth APIs
+- Do NOT expose `service_role` key in client-side code
+- Do NOT skip middleware protection for `/posts/new` and `/posts/edit/[id]`
+- Do NOT hard-code user check in CRUD operations — let RLS enforce permissions in Ch11
+- Do NOT query `auth.users` directly from client — use Supabase Auth SDK or session context

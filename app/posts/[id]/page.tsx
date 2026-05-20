@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { getPostById } from "@/lib/posts";
 import PostDetailClient from "./post-detail-client";
 
 type Props = {
@@ -7,8 +9,12 @@ type Props = {
 };
 
 export default async function PostPage({ params }: Props) {
-  // 요청대로 params를 await하여 id를 추출
   const { id } = await params;
+  const post = await getPostById(id);
 
-  return <PostDetailClient id={id} />;
+  if (!post) {
+    notFound();
+  }
+
+  return <PostDetailClient post={post} />;
 }

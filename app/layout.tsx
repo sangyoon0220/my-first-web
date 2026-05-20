@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/contexts/AuthContext";
-import Header from "@/app/header";
+import Header from "./header";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 

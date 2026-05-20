@@ -1,5 +1,13 @@
 import { createClient } from "@/lib/supabase/client";
 
+function getAuthRedirectTo() {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  return `${window.location.origin}/auth/callback?next=/posts`;
+}
+
 /**
  * 이메일과 비밀번호로 로그인
  * @param email 이메일
@@ -48,6 +56,7 @@ export async function signUpWithEmail(
         data: {
           name,
         },
+        emailRedirectTo: getAuthRedirectTo(),
       },
     });
 
@@ -78,6 +87,7 @@ export async function sendEmailCode(email: string) {
       email,
       options: {
         shouldCreateUser: true,
+        emailRedirectTo: getAuthRedirectTo(),
       },
     });
 
