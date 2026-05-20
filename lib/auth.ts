@@ -78,6 +78,7 @@ export async function sendEmailCode(email: string) {
       email,
       options: {
         shouldCreateUser: true,
+        emailRedirectTo: undefined,  // 매직링크 비활성화, OTP 코드 방식으로 전송
       },
     });
 
