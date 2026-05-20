@@ -1,5 +1,4 @@
--- profiles: auth.users 확장 (닉네임·역할 등 추가 정보)
-create table profiles (
+create table if not exists profiles (
   id uuid references auth.users(id) on delete cascade primary key,
   username text,
   avatar_url text,
@@ -8,7 +7,7 @@ create table profiles (
 );
 
 -- posts: 블로그 글
-create table posts (
+create table if not exists posts (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references profiles(id) on delete cascade not null,
   title text not null,
