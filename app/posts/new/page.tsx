@@ -1,6 +1,5 @@
 "use client";
 
-import { createPost } from "@/lib/posts";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -51,9 +50,24 @@ export default function NewPostPage() {
     setIsSubmitting(true);
 
     try {
-      const newPost = await createPost(title.trim(), content.trim(), user.id);
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: title.trim(),
+          content: content.trim(),
+          user_id: user.id,
+        }),
+      });
 
-      if (newPost) {
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.error || "글 작성에 실패했습니다.");
+        return;
+      }
+
+      const newPost = await response.json();
+      if (newPost.id) {
         router.push(`/posts/${newPost.id}`);
       } else {
         setError("글 작성에 실패했습니다.");
