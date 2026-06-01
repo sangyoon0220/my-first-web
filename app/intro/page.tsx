@@ -4,6 +4,13 @@ export default function IntroPage() {
   return (
     <section className="max-w-4xl mx-auto py-8">
       <div className="rounded-2xl border-2 border-lime-300 bg-white p-8 shadow-md text-blue-950">
+        <div className="mb-6">
+          <img
+            src="https://www.hs.ac.kr/sites/kor/images/contents_major_01_08_04.jpg"
+            alt="전공 대표 이미지"
+            className="w-full h-48 object-cover rounded-lg shadow-sm"
+          />
+        </div>
         <h1 className="text-3xl font-black mb-4">과 소개</h1>
 
         <h2 className="text-xl font-bold mt-2 mb-3">전공 소개</h2>
@@ -42,6 +49,16 @@ export default function IntroPage() {
         <Link href="/" className="inline-block mt-6 text-sm text-blue-700 hover:underline">
           메인으로 돌아가기
         </Link>
+        <div className="mt-6 border-t pt-4 text-sm text-blue-900/80">
+          <p>담당부서: 공공인재빅데이터융합학</p>
+          <p>전화(수업): 031-379-0490 · 전화(학적): 031-379-0530 · 행정실: 6204호</p>
+          <p className="mt-2">
+            전공 홈페이지: <a href="https://hanshin-gongbig.netlify.app/" className="text-blue-700 hover:underline">공공인재빅데이터융합학</a>
+          </p>
+          <p>
+            전공 소개(PDF): <a href="https://www.hs.ac.kr/sites/kor/files/2025%20%EC%A0%84%EA%B3%B5%EC%86%8C%EA%B0%9C_%EA%B3%B5%EA%B3%B5%EC%9D%B8%EC%9E%AC%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%BC%93%ED%95%A9%ED%95%99.pdf" className="text-blue-700 hover:underline">PDF 보기</a>
+          </p>
+        </div>
       </div>
     </section>
   );
