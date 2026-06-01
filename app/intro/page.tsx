@@ -86,7 +86,7 @@ export default function IntroPage() {
             전공 홈페이지: <a href="https://hanshin-gongbig.netlify.app/" className="text-blue-700 hover:underline">공공인재빅데이터융합학</a>
           </p>
           <p>
-            전공 소개(PDF): <a href="https://www.hs.ac.kr/sites/kor/files/2025%20%EC%A0%84%EA%B3%B5%EC%86%8C%EA%B0%9C_%EA%B3%B5%EA%B3%B5%EC%9D%B8%EC%9E%AC%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%BC%93%ED%95%A9%ED%95%99.pdf" className="text-blue-700 hover:underline">PDF 보기</a>
+            전공 소개(PDF): <a href="/docs/major_introduce.pdf" className="text-blue-700 hover:underline">PDF 보기</a>
           </p>
         </div>
       </div>
