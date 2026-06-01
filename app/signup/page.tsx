@@ -12,6 +12,7 @@ export default function SignupPage() {
   const [step, setStep] = useState<"email" | "code">("email");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [verified, setVerified] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -25,6 +26,11 @@ export default function SignupPage() {
     try {
       if (!email) {
         setError("이메일을 입력해주세요.");
+        return;
+      }
+
+      if (!password || password.length < 8) {
+        setError("비밀번호는 최소 8자리 이상이어야 합니다.");
         return;
       }
 
@@ -42,7 +48,7 @@ export default function SignupPage() {
 
       setStep("code");
       setCode("");
-      setMessage("인증 코드를 이메일로 보냈습니다. 받은 코드를 입력하세요.");
+      setMessage("인증 코드를 이메일로 보냈습니다. 이메일로 받은 인증번호(8자리)를 입력하세요.");
     } finally {
       setLoading(false);
     }
@@ -122,6 +128,20 @@ export default function SignupPage() {
               />
             </div>
 
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
+                비밀번호 (최소 8자리)
+              </label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="비밀번호를 입력하세요"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+              />
+            </div>
+
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "인증 코드 전송 중..." : "인증 코드 보내기"}
             </Button>
@@ -139,13 +159,13 @@ export default function SignupPage() {
 
             <div>
               <label htmlFor="code" className="block text-sm font-medium text-foreground mb-1">
-                인증 코드
+                인증번호
               </label>
               <Input
                 id="code"
                 type="text"
                 inputMode="numeric"
-                placeholder="6자리 코드"
+                placeholder="인증번호를 입력하세요 (예: 8자리 숫자)"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 disabled={loading}
