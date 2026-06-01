@@ -60,6 +60,22 @@ export default function IntroPage() {
           <a href="https://www.hs.ac.kr/kor/10502/subview.do" className="text-blue-700 hover:underline">교육과정 전체 보기</a>
         </p>
 
+        <h2 className="text-xl font-bold mt-8 mb-3">전공 홈페이지(공빅) 소개</h2>
+        <p className="text-blue-900/85 leading-7">
+          보다 자세한 전공 정보와 교수진, 학생 지원 프로그램은 전공 공식 홈페이지에서 확인할 수 있습니다.
+          공빅은 <strong>공공관리 트랙</strong>과 <strong>공공빅데이터 트랙</strong>의 두 트랙을 운영하며,
+          행정학사와 빅데이터분석학사 두 학위를 동시에 취득할 수 있는 국내 유일의 융합 전공입니다.
+        </p>
+        <p className="text-blue-900/85 leading-7 mt-2">
+          주요 특징: 전용 실습실·전용 스터디 공간, 공무원·공기업 준비반, 3개 전공 소학회, 실전 중심의 데이터 분석 교육 등.
+        </p>
+        <p className="mt-2">
+          전공 공식 홈페이지: <a href="https://hanshin-gongbig.netlify.app/" className="text-blue-700 hover:underline">공빅 공식 홈페이지</a>
+        </p>
+        <p className="mt-1 text-sm text-blue-900/80">
+          학과 문의: <a href="mailto:nsc0203@hs.ac.kr" className="text-blue-700 hover:underline">nsc0203@hs.ac.kr</a>
+        </p>
+
         <Link href="/" className="inline-block mt-6 text-sm text-blue-700 hover:underline">
           메인으로 돌아가기
         </Link>
