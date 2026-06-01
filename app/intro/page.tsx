@@ -46,6 +46,20 @@ export default function IntroPage() {
           <li>기업체 및 민간기관: 기획/인사/총무 담당자, 데이터분석가, 공공정책연구원</li>
         </ul>
 
+        <h2 className="text-xl font-bold mt-8 mb-3">교육과정</h2>
+        <p className="text-blue-900/85 leading-7">
+          졸업요건: 총 130학점 이상(전공 기준은 전공별 상이). 주요 전공 필수과목으로는
+          <strong> 공공조직관리론, 사회조사분석, 조사연구방법론, 졸업논문</strong> 등이 있으며,
+          전공선택 과목으로는 <strong>기초프로그래밍, 파이썬데이터분석기초, 머신러닝이해와활용, 데이터기반정책관리</strong>
+          등 데이터와 행정을 연결하는 과목들이 개설되어 있습니다.
+        </p>
+        <p className="text-blue-900/85 leading-7 mt-2">
+          전체 교과과정(학수번호 및 학기 배치 등)은 아래 링크에서 확인하세요.
+        </p>
+        <p className="mt-2">
+          <a href="https://www.hs.ac.kr/kor/10502/subview.do" className="text-blue-700 hover:underline">교육과정 전체 보기</a>
+        </p>
+
         <Link href="/" className="inline-block mt-6 text-sm text-blue-700 hover:underline">
           메인으로 돌아가기
         </Link>
