@@ -57,7 +57,7 @@ export default function IntroPage() {
           전체 교과과정(학수번호 및 학기 배치 등)은 아래 링크에서 확인하세요.
         </p>
         <p className="mt-2">
-          <a href="https://www.hs.ac.kr/kor/10502/subview.do" className="text-blue-700 hover:underline">교육과정 전체 보기</a>
+          <Link href="/intro/curriculum" className="text-blue-700 hover:underline">교육과정 전체 보기 (내부)</Link>
         </p>
 
         <h2 className="text-xl font-bold mt-8 mb-3">전공 공식 정보 (내부 페이지)</h2>

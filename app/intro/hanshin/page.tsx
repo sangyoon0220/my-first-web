@@ -34,22 +34,70 @@ export default function HanshinPage() {
           <li>자격증 및 외부 연계: 사회조사분석사, 빅데이터분석기사 등 취득 지원</li>
         </ul>
 
-        <h2 className="text-xl font-bold mt-6 mb-3">교수진 하이라이트</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-3 bg-card rounded-lg">
-            <img src="/images/professors/yoon_geon.svg" alt="윤건" className="w-full h-28 object-cover rounded" />
-            <p className="font-bold mt-2">윤건</p>
-            <p className="text-sm">부교수 — 공공관리·데이터기반행정</p>
+        <h2 className="text-xl font-bold mt-6 mb-3">교수진</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/yoon_geon.svg" alt="윤건" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">윤건</p>
+              <p className="text-sm">부교수 · 학과장 — 공공관리·데이터기반행정</p>
+              <p className="text-sm mt-1">서울대학교 행정학 박사. 연구 분야: 데이터기반 행정, 인공지능 정부, 공공조직 및 인사관리.</p>
+              <p className="text-sm mt-1">연락처: 031-379-0739 · <a href="mailto:kyoon2010@hs.ac.kr" className="text-blue-700">kyoon2010@hs.ac.kr</a></p>
+            </div>
           </div>
-          <div className="p-3 bg-card rounded-lg">
-            <img src="/images/professors/lee_seokmin.svg" alt="이석민" className="w-full h-28 object-cover rounded" />
-            <p className="font-bold mt-2">이석민</p>
-            <p className="text-sm">부교수 — 정책분석평가·공공빅데이터분석</p>
+
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/lee_seokmin.svg" alt="이석민" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">이석민</p>
+              <p className="text-sm">부교수 — 정책분석평가·공공빅데이터분석</p>
+              <p className="text-sm mt-1">서울대학교 정치학 박사(과학기술정책). 연구 및 정책자문 경력 보유.</p>
+              <p className="text-sm mt-1">연락처: 031-379-0738 · <a href="mailto:newmind68@hs.ac.kr" className="text-blue-700">newmind68@hs.ac.kr</a></p>
+            </div>
           </div>
-          <div className="p-3 bg-card rounded-lg">
-            <img src="/images/professors/no_seungchul.svg" alt="노승철" className="w-full h-28 object-cover rounded" />
-            <p className="font-bold mt-2">노승철</p>
-            <p className="text-sm">부교수 — 빅데이터분석·공간정보분석</p>
+
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/no_seungchul.svg" alt="노승철" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">노승철</p>
+              <p className="text-sm">부교수 — 빅데이터분석·공간정보분석</p>
+              <p className="text-sm mt-1">서울대학교 환경대학원 도시계획학 박사. 연구 분야: GIS, 사회조사, 빅데이터 분석.</p>
+              <p className="text-sm mt-1">연락처: 031-379-0842 · <a href="mailto:nsc0203@hs.ac.kr" className="text-blue-700">nsc0203@hs.ac.kr</a></p>
+            </div>
+          </div>
+
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/kang_hyun.svg" alt="강현" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">강현</p>
+              <p className="text-sm">겸임교수 — 법학 (형사법·행정법)</p>
+              <p className="text-sm mt-1">법률 실무 및 교육 경력 보유. 행정법·형사법 관련 강의 담당.</p>
+              <p className="text-sm mt-1">이메일: <a href="mailto:kanghyun@hs.ac.kr" className="text-blue-700">kanghyun@hs.ac.kr</a></p>
+            </div>
+          </div>
+
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/jang_gwangho.svg" alt="장광호" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">장광호</p>
+              <p className="text-sm">초빙 — AI·개인정보 / 빅데이터와 개인정보보호</p>
+            </div>
+          </div>
+
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/kim_daejung.svg" alt="김대중" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">김대중</p>
+              <p className="text-sm">초빙 — 재무행정</p>
+            </div>
+          </div>
+
+          <div className="p-3 bg-card rounded-lg flex gap-3">
+            <img src="/images/professors/shin_seungyun.svg" alt="신승윤" className="w-28 h-28 object-cover rounded" />
+            <div>
+              <p className="font-bold">신승윤</p>
+              <p className="text-sm">초빙 — 지방행정·공공혁신</p>
+            </div>
           </div>
         </div>
 
