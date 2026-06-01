@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -8,9 +8,9 @@ export default function Home() {
           DEPARTMENT GUIDE
         </span>
         <h1 className="text-3xl md:text-5xl font-black leading-tight mb-2">
-          공공인재빅데이터융합학
+          공공인재빅데이터융합학전공
         </h1>
-        <p className="text-sm md:text-base text-blue-900/70">학과 안내 메뉴를 선택해 자세한 정보를 확인하세요.</p>
+        <p className="text-sm md:text-base text-blue-900/70">학과 안내 메뉴를 선택하여 자세한 정보를 확인하세요.</p>
 
         <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4">
           <Link
@@ -23,13 +23,13 @@ export default function Home() {
             href="/professors"
             className="text-center px-5 py-4 text-base rounded-xl border border-blue-900 bg-blue-950 text-lime-100 font-bold hover:bg-blue-900 hover:-translate-y-0.5 transition"
           >
-            교수님
+            교수진
           </Link>
           <Link
             href="/leaders"
             className="text-center px-5 py-4 text-base rounded-xl border border-blue-900 bg-blue-950 text-lime-100 font-bold hover:bg-blue-900 hover:-translate-y-0.5 transition"
           >
-            역대 회장단
+            대표 학생회
           </Link>
           <Link
             href="/student-council-6"
@@ -79,6 +79,29 @@ export default function Home() {
         >
           한신대학교 중앙도서관
         </a>
+      </div>
+      
+      {/* 학과 공지사항 및 자유게시판 섹션 */}
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="rounded-2xl border-2 border-lime-300 bg-white p-6 shadow-md text-blue-950">
+          <h2 className="text-xl font-bold mb-3">학과 공지사항</h2>
+          <ul className="text-sm text-blue-900/85 space-y-2">
+            <li>2025-03-10 | 2025학년도 1학기 수강신청 안내</li>
+            <li>2025-03-05 | 신입생 오리엔테이션 자료</li>
+            <li>2025-02-28 | 학과 사무실 운영 시간 안내</li>
+          </ul>
+          <Link href="/notices" className="inline-block mt-4 text-sm text-blue-700 hover:underline">
+            공지사항 전체 보기
+          </Link>
+        </div>
+
+        <div className="rounded-2xl border-2 border-lime-300 bg-white p-6 shadow-md text-blue-950">
+          <h2 className="text-xl font-bold mb-3">자유게시판</h2>
+          <p className="text-sm text-blue-900/85">학우들이 올린 최신 글과 소식을 한눈에 확인하세요.</p>
+          <Link href="/posts" className="inline-block mt-4 text-sm text-blue-700 hover:underline">
+            바로가기
+          </Link>
+        </div>
       </div>
     </section>
   );
