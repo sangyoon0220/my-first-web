@@ -29,7 +29,7 @@ export default function Home() {
             href="/leaders"
             className="text-center px-5 py-4 text-base rounded-xl border border-blue-900 bg-blue-950 text-lime-100 font-bold hover:bg-blue-900 hover:-translate-y-0.5 transition"
           >
-            대표 학생회
+            역대 학생회
           </Link>
           <Link
             href="/student-council-6"
