@@ -60,9 +60,7 @@ export default function Home() {
             공빅 링크트리
           </a>
 
-          <Link href="/" className="ml-2 text-sm text-blue-800 hover:underline hidden md:inline">
-            메인으로 돌아가기
-          </Link>
+          
         </div>
 
         <div className="flex flex-wrap items-center gap-3 justify-center md:justify-end w-full md:w-auto">
