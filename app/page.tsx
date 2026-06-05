@@ -46,39 +46,27 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-lime-300/80 bg-lime-50 px-4 py-3 flex flex-wrap items-center justify-center gap-6 text-sm text-blue-900">
-        <a
-          href="https://linktr.ee/hsgongbig?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn0NuKcwSozqwfaderPou0rT7dqiYDxbC_NQcaAsbKJ56fhl9m4eESyVFCzZw_aem_d4ks0aJY1nQHATFq-hG-oA"
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold text-blue-950 hover:text-blue-700 hover:underline underline-offset-4"
-        >
-          공빅 링크트리
-        </a>
-        <a
-          href="https://hs.ac.kr/kor/index..do"
-          target="_blank"
-          rel="noreferrer"
-          className="font-medium hover:text-blue-700 hover:underline underline-offset-4"
-        >
-          한신대학교
-        </a>
-        <a
-          href="https://hsctis.hs.ac.kr/app-nexa/index.html"
-          target="_blank"
-          rel="noreferrer"
-          className="font-medium hover:text-blue-700 hover:underline underline-offset-4"
-        >
-          한신종합정보
-        </a>
-        <a
-          href="https://hslib.hs.ac.kr/"
-          target="_blank"
-          rel="noreferrer"
-          className="font-medium hover:text-blue-700 hover:underline underline-offset-4"
-        >
-          한신대학교 중앙도서관
-        </a>
+      <div className="mt-6 rounded-2xl border border-lime-300/80 bg-lime-50 px-4 py-4 flex flex-col md:flex-row items-center md:justify-between gap-4 text-sm text-blue-900">
+        <div className="flex items-center gap-4 w-full md:w-auto">
+          <a
+            href="https://linktr.ee/hsgongbig?utm_source=ig&utm_medium=social&utm_content=link_in_bio"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-gradient-to-r from-blue-800 to-indigo-600 text-white font-bold shadow-md hover:from-blue-700 hover:to-indigo-500 transform hover:-translate-y-0.5 transition"
+          >
+            인스타그램 바로가기
+          </a>
+
+          <Link href="/" className="ml-2 text-sm text-blue-800 hover:underline hidden md:inline">
+            메인으로 돌아가기
+          </Link>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 justify-center md:justify-end w-full md:w-auto">
+          <a href="https://hs.ac.kr/kor/index..do" target="_blank" rel="noreferrer" className="px-3 py-1 bg-white rounded-full shadow-sm text-blue-800 hover:bg-blue-50">한신대학교</a>
+          <a href="https://hsctis.hs.ac.kr/app-nexa/index.html" target="_blank" rel="noreferrer" className="px-3 py-1 bg-white rounded-full shadow-sm text-blue-800 hover:bg-blue-50">한신종합정보</a>
+          <a href="https://hslib.hs.ac.kr/" target="_blank" rel="noreferrer" className="px-3 py-1 bg-white rounded-full shadow-sm text-blue-800 hover:bg-blue-50">중앙도서관</a>
+        </div>
       </div>
       
       {/* 학과 공지사항 및 자유게시판 섹션 */}
