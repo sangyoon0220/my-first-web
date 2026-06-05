@@ -3,6 +3,9 @@
 export default function Home() {
   return (
     <section className="py-8 md:py-14">
+      <div className="mb-6 flex justify-center">
+        <img src="/images/header-penguins.png" alt="학우들 마스코트" className="w-40 md:w-56 rounded-xl shadow-lg" />
+      </div>
       <div className="bg-white border border-lime-300/90 rounded-3xl shadow-[0_10px_30px_rgba(15,23,42,0.08)] p-8 md:p-12 text-blue-950">
         <span className="inline-block mb-4 px-3 py-1 rounded-full border border-lime-300 bg-lime-200 text-blue-950 text-xs font-extrabold tracking-wide">
           DEPARTMENT GUIDE
