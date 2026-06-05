@@ -52,9 +52,10 @@ export default function Home() {
             href="https://linktr.ee/hsgongbig?utm_source=ig&utm_medium=social&utm_content=link_in_bio"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-gradient-to-r from-blue-800 to-indigo-600 text-white font-bold shadow-md hover:from-blue-700 hover:to-indigo-500 transform hover:-translate-y-0.5 transition"
+            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-blue-800 to-indigo-600 text-white font-bold shadow-md hover:from-blue-700 hover:to-indigo-500 transform hover:-translate-y-0.5 transition"
           >
-            인스타그램 바로가기
+            <img src="/images/instagram.webp" alt="instagram" className="w-6 h-6 rounded" />
+            <span className="hidden sm:inline">인스타그램 바로가기</span>
           </a>
 
           <Link href="/" className="ml-2 text-sm text-blue-800 hover:underline hidden md:inline">
