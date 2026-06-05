@@ -11,7 +11,7 @@ export default function Home() {
           DEPARTMENT GUIDE
         </span>
         <h1 className="text-3xl md:text-5xl font-black leading-tight mb-2">
-          공공인재빅데이터융합학전공
+          공공인재빅데이터융합학
         </h1>
         <p className="text-sm md:text-base text-blue-900/70">학과 안내 메뉴를 선택하여 자세한 정보를 확인하세요.</p>
 
@@ -55,10 +55,9 @@ export default function Home() {
             href="https://linktr.ee/hsgongbig?utm_source=ig&utm_medium=social&utm_content=link_in_bio"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-blue-800 to-indigo-600 text-white font-bold shadow-md hover:from-blue-700 hover:to-indigo-500 transform hover:-translate-y-0.5 transition"
+            className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-gradient-to-r from-blue-800 to-indigo-600 text-white font-bold shadow-md hover:from-blue-700 hover:to-indigo-500 transform hover:-translate-y-0.5 transition"
           >
-            <img src="/images/instagram.webp" alt="instagram" className="w-6 h-6 rounded" />
-            <span className="hidden sm:inline">인스타그램 바로가기</span>
+            공빅 링크트리
           </a>
 
           <Link href="/" className="ml-2 text-sm text-blue-800 hover:underline hidden md:inline">
