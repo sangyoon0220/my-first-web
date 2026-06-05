@@ -13,9 +13,9 @@ export default function StudentCouncilSixPage() {
           href="https://www.instagram.com/hanshin_doodle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
           target="_blank"
           rel="noreferrer"
-          className="inline-block mt-5 px-4 py-2 rounded-lg bg-blue-950 text-lime-100 font-semibold hover:bg-blue-900 transition-colors"
+          className="inline-block mt-5 p-1 rounded-full hover:opacity-90"
         >
-          인스타그램 바로가기
+          <img src="/images/instagram.webp" alt="instagram" className="w-10 h-10" />
         </a>
         <Link href="/" className="inline-block mt-6 text-sm text-blue-700 hover:underline">
           메인으로 돌아가기
