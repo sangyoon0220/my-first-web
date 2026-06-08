@@ -33,7 +33,7 @@ export default function SettingsPage() {
     setLoading(true);
     try {
       const updates: any = { name };
-      if (email && email !== user.email) updates.email = email;
+      // Email change disabled from settings UI
       if (username) updates.username = username;
       if (showPasswordInput && password) updates.password = password;
 
@@ -66,7 +66,7 @@ export default function SettingsPage() {
 
         <div>
           <label className="block text-sm font-medium mb-1">이메일</label>
-          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input value={email} readOnly disabled className="bg-gray-100" />
         </div>
 
         <div>
