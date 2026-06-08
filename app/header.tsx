@@ -14,7 +14,6 @@ export default function Header() {
   const [showPanel, setShowPanel] = useState(false);
   const [editName, setEditName] = useState("");
   const [editEmail, setEditEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showChangePwd, setShowChangePwd] = useState(false);
   const [currentPwd, setCurrentPwd] = useState("");
@@ -35,7 +34,6 @@ export default function Header() {
     if (!user) return;
     setEditName(user.user_metadata?.name ?? "");
     setEditEmail(user.email ?? "");
-    setUsername(user.user_metadata?.username ?? "");
     setShowPanel((s) => !s);
     setStatusMsg(null);
   }
@@ -46,7 +44,6 @@ export default function Header() {
     try {
       const updates: any = { name: editName };
       if (editEmail && editEmail !== user.email) updates.email = editEmail;
-      if (username) updates.username = username;
       const { user: updated, error } = await updateUser(updates);
       if (error) {
         setStatusMsg(error);
@@ -148,16 +145,7 @@ export default function Header() {
                       <label className="text-sm text-foreground">이메일</label>
                       <Input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
                     </div>
-                    <div className="mb-2">
-                      <label className="text-sm text-foreground">아이디 (username)</label>
-                      <Input value={username} onChange={(e) => setUsername(e.target.value)} />
-                    </div>
-                    <div className="mb-2">
-                      <label className="text-sm text-foreground">비밀번호</label>
-                      <div className="flex items-center gap-2">
-                        <span className="flex-1 text-sm">********</span>
-                      </div>
-                    </div>
+                    
                     {!showChangePwd ? (
                       <div className="flex gap-2 mt-2">
                         <Button onClick={() => setShowChangePwd(true)}>비밀번호 변경</Button>
