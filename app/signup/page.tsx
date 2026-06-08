@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { signUpWithEmail, sendEmailCode } from "@/lib/auth";
+import { signUpWithEmail, sendEmailCode, verifyEmailCode } from "@/lib/auth";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -14,6 +14,9 @@ export default function SignupPage() {
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [code, setCode] = useState("");
+  const [codeSent, setCodeSent] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSignup(e: React.FormEvent) {
@@ -25,6 +28,10 @@ export default function SignupPage() {
     try {
       if (!email) {
         setError("이메일을 입력해주세요.");
+        return;
+      }
+      if (!emailVerified) {
+        setError("이메일 인증을 먼저 완료해 주세요.");
         return;
       }
       if (!password || password.length < 8) {
@@ -40,15 +47,60 @@ export default function SignupPage() {
       }
 
       if (user) {
-        // Attempt to send a verification email/magic link in case the project doesn't auto-send
-        try {
-          await sendEmailCode(email);
-          setMessage("회원가입이 완료되었습니다. 인증 메일을 전송했습니다. 이메일을 확인해주세요.");
-        } catch (e) {
-          setMessage("회원가입이 완료되었습니다. 이메일 인증을 기다려주세요.");
-        }
-        // Do not auto-redirect — wait for user to confirm email and login
+        setMessage("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+        setTimeout(() => router.push("/login"), 1200);
       }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleSendCode() {
+    setError(null);
+    setMessage(null);
+    setLoading(true);
+    try {
+      if (!email) {
+        setError("이메일을 입력해주세요.");
+        return;
+      }
+
+      const res = await sendEmailCode(email);
+      if (!res.success) {
+        setError(res.error ?? "인증 코드 전송에 실패했습니다.");
+        return;
+      }
+
+      setCodeSent(true);
+      setMessage("인증 코드가 전송되었습니다. 이메일을 확인하세요.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleVerifyCode(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    setError(null);
+    setMessage(null);
+    setLoading(true);
+    try {
+      if (!email) {
+        setError("이메일을 입력해주세요.");
+        return;
+      }
+      if (!code) {
+        setError("인증 코드를 입력해주세요.");
+        return;
+      }
+
+      const { user, error: verifyError } = await verifyEmailCode(email, code);
+      if (verifyError) {
+        setError(verifyError as string);
+        return;
+      }
+
+      setEmailVerified(true);
+      setMessage("이메일 인증이 완료되었습니다. 비밀번호를 설정하고 회원가입을 진행하세요.");
     } finally {
       setLoading(false);
     }
@@ -79,7 +131,23 @@ export default function SignupPage() {
             <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
               이메일
             </label>
-            <Input id="email" type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} />
+            <div className="flex gap-2">
+              <Input id="email" type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading || emailVerified} />
+              <Button type="button" onClick={handleSendCode} disabled={loading || emailVerified}>
+                {codeSent ? "다시 전송" : "인증코드 전송"}
+              </Button>
+            </div>
+
+            {codeSent && !emailVerified && (
+              <div className="mt-2 flex gap-2">
+                <Input placeholder="인증번호 6자리" value={code} onChange={(e) => setCode(e.target.value)} disabled={loading} />
+                <Button type="button" onClick={handleVerifyCode} disabled={loading}>확인</Button>
+              </div>
+            )}
+
+            {emailVerified && (
+              <div className="mt-2 text-sm text-green-700">이메일 인증 완료</div>
+            )}
           </div>
 
           <div>
