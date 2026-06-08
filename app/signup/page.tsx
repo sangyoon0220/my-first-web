@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { signUpWithEmail } from "@/lib/auth";
+import { signUpWithEmail, sendEmailCode } from "@/lib/auth";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -40,8 +40,14 @@ export default function SignupPage() {
       }
 
       if (user) {
-        setMessage("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
-        setTimeout(() => router.push("/login"), 1200);
+        // Attempt to send a verification email/magic link in case the project doesn't auto-send
+        try {
+          await sendEmailCode(email);
+          setMessage("회원가입이 완료되었습니다. 인증 메일을 전송했습니다. 이메일을 확인해주세요.");
+        } catch (e) {
+          setMessage("회원가입이 완료되었습니다. 이메일 인증을 기다려주세요.");
+        }
+        // Do not auto-redirect — wait for user to confirm email and login
       }
     } finally {
       setLoading(false);
