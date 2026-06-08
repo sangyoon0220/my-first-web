@@ -136,23 +136,23 @@ export default function Header() {
                   로그아웃
                 </Button>
                 {showPanel && (
-                  <div className="absolute right-6 top-20 w-80 bg-card p-4 rounded shadow-lg z-50">
+                  <div className="absolute right-6 top-20 w-80 bg-card p-4 rounded shadow-lg z-50 text-foreground">
                     <h3 className="font-semibold mb-2">설정</h3>
                     {statusMsg && <div className="mb-2 text-sm text-red-600">{statusMsg}</div>}
                     <div className="mb-2">
-                      <label className="text-sm">이름</label>
+                      <label className="text-sm text-foreground">이름</label>
                       <Input value={editName} onChange={(e) => setEditName(e.target.value)} />
                     </div>
                     <div className="mb-2">
-                      <label className="text-sm">이메일</label>
+                      <label className="text-sm text-foreground">이메일</label>
                       <Input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
                     </div>
                     <div className="mb-2">
-                      <label className="text-sm">아이디 (username)</label>
+                      <label className="text-sm text-foreground">아이디 (username)</label>
                       <Input value={username} onChange={(e) => setUsername(e.target.value)} />
                     </div>
                     <div className="mb-2">
-                      <label className="text-sm">비밀번호</label>
+                      <label className="text-sm text-foreground">비밀번호</label>
                       <div className="flex items-center gap-2">
                         <span className="flex-1 text-sm">********</span>
                         <button
