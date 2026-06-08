@@ -9,11 +9,9 @@ import { Input } from "@/components/ui/input";
 
 export default function Header() {
   const router = useRouter();
-  const { user, loading, signOut } = useAuth();
-  const { updateUser, signInWithEmail } = useAuth() as any;
+  const { user, loading, signOut, updateUser, signInWithEmail } = useAuth() as any;
   const [showPanel, setShowPanel] = useState(false);
   const [editName, setEditName] = useState("");
-  const [editEmail, setEditEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showChangePwd, setShowChangePwd] = useState(false);
   const [currentPwd, setCurrentPwd] = useState("");
@@ -33,7 +31,6 @@ export default function Header() {
   function openPanel() {
     if (!user) return;
     setEditName(user.user_metadata?.name ?? "");
-    setEditEmail(user.email ?? "");
     setShowPanel((s) => !s);
     setStatusMsg(null);
   }
@@ -42,9 +39,7 @@ export default function Header() {
     setPanelLoading(true);
     setStatusMsg(null);
     try {
-      const updates: any = { name: editName };
-      if (editEmail && editEmail !== user.email) updates.email = editEmail;
-      const { user: updated, error } = await updateUser(updates);
+      const { error } = await updateUser({ name: editName });
       if (error) {
         setStatusMsg(error);
         return;
@@ -114,12 +109,16 @@ export default function Header() {
               <span className="text-sm text-lime-200">로딩 중...</span>
             ) : user ? (
               <>
-                <Link href="/settings" className="text-sm text-lime-200 hover:underline">
-                  <span className="text-sm text-lime-200 flex items-center gap-2">
-                    <span>{user.user_metadata?.name || user.email}님</span>
-                    <button onClick={openPanel} className="text-xs px-2 py-1 bg-lime-300 text-blue-950 rounded">설정</button>
-                  </span>
-                </Link>
+                <div className="flex items-center gap-2 text-sm text-lime-200">
+                  <span>{user.user_metadata?.name || user.email}님</span>
+                  <button
+                    type="button"
+                    onClick={openPanel}
+                    className="text-xs px-2 py-1 bg-lime-300 text-blue-950 rounded hover:bg-lime-200"
+                  >
+                    설정
+                  </button>
+                </div>
                 <Link href="/posts/new">
                   <Button variant="outline" size="sm" className="bg-lime-300 text-blue-950 hover:bg-lime-200">
                     글쓰기
@@ -143,7 +142,7 @@ export default function Header() {
                     </div>
                     <div className="mb-2">
                       <label className="text-sm text-foreground">이메일</label>
-                      <Input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
+                      <Input value={user.email ?? ""} disabled readOnly />
                     </div>
                     
                     {!showChangePwd ? (
