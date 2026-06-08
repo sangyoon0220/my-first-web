@@ -37,9 +37,9 @@ export default function Header() {
               <span className="text-sm text-lime-200">로딩 중...</span>
             ) : user ? (
               <>
-                <span className="text-sm text-lime-200">
+                <Link href="/settings" className="text-sm text-lime-200 hover:underline">
                   {user.user_metadata?.name || user.email}님
-                </span>
+                </Link>
                 <Link href="/posts/new">
                   <Button variant="outline" size="sm" className="bg-lime-300 text-blue-950 hover:bg-lime-200">
                     글쓰기
