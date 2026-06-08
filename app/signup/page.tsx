@@ -75,23 +75,7 @@ export default function SignupPage() {
             <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
               이메일
             </label>
-            <div className="flex gap-2">
-              <Input id="email" type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading || emailVerified} />
-              <Button type="button" onClick={handleSendCode} disabled={loading || emailVerified}>
-                {codeSent ? "다시 전송" : "인증코드 전송"}
-              </Button>
-            </div>
-
-            {codeSent && !emailVerified && (
-              <div className="mt-2 flex gap-2">
-                <Input placeholder="인증번호 6자리" value={code} onChange={(e) => setCode(e.target.value)} disabled={loading} />
-                <Button type="button" onClick={handleVerifyCode} disabled={loading}>확인</Button>
-              </div>
-            )}
-
-            {emailVerified && (
-              <div className="mt-2 text-sm text-green-700">이메일 인증 완료</div>
-            )}
+            <Input id="email" type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} />
           </div>
 
           <div>
