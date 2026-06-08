@@ -144,3 +144,31 @@ export async function signOut() {
     return { success: false, error: message };
   }
 }
+
+/**
+ * Update user profile (name, email, password)
+ * @param updates { email?, password?, name? }
+ */
+export async function updateUser(updates: { email?: string; password?: string; name?: string }) {
+  const supabase = createClient();
+
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      email: updates.email,
+      password: updates.password,
+      data: {
+        name: updates.name,
+      },
+    });
+
+    if (error) {
+      console.error("updateUser error detail:", error);
+      return { user: null, error: error.message };
+    }
+
+    return { user: data.user, error: null };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "프로필 업데이트 중 오류가 발생했습니다.";
+    return { user: null, error: message };
+  }
+}

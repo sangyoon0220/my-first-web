@@ -11,6 +11,7 @@ interface AuthContextType {
   signInWithEmail: (email: string, password: string) => Promise<{ user: User | null; error: string | null }>;
   signUpWithEmail: (email: string, password: string, name: string) => Promise<{ user: User | null; error: string | null }>;
   signOut: () => Promise<{ success: boolean; error: string | null }>;
+  updateUser: (updates: { email?: string; password?: string; name?: string }) => Promise<{ user: User | null; error: string | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -58,6 +59,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signInWithEmail: authFunctions.signInWithEmail,
         signUpWithEmail: authFunctions.signUpWithEmail,
         signOut: authFunctions.signOut,
+        updateUser: authFunctions.updateUser,
       }}
     >
       {children}
