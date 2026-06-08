@@ -149,7 +149,7 @@ export async function signOut() {
  * Update user profile (name, email, password)
  * @param updates { email?, password?, name? }
  */
-export async function updateUser(updates: { email?: string; password?: string; name?: string }) {
+export async function updateUser(updates: { email?: string; password?: string; name?: string; username?: string }) {
   const supabase = createClient();
 
   try {
@@ -158,6 +158,7 @@ export async function updateUser(updates: { email?: string; password?: string; n
       password: updates.password,
       data: {
         name: updates.name,
+        username: updates.username,
       },
     });
 
