@@ -93,16 +93,6 @@ export default function SignupPage() {
         return;
       }
 
-      // Development bypass: allow a fixed dev code when not in production
-      if (process.env.NODE_ENV !== "production") {
-        const devCode = process.env.NEXT_PUBLIC_DEV_VERIFY_CODE ?? "000000";
-        if (code === devCode) {
-          setEmailVerified(true);
-          setMessage("개발용 인증 완료 (dev code)");
-          return;
-        }
-      }
-
       const { user, error: verifyError } = await verifyEmailCode(email, code);
       if (verifyError) {
         setError(verifyError as string);
