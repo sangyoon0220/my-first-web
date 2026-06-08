@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { signUpWithEmail, sendEmailCode, verifyEmailCode } from "@/lib/auth";
+import { signUpWithEmail } from "@/lib/auth";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -14,9 +14,6 @@ export default function SignupPage() {
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
-  const [code, setCode] = useState("");
-  const [codeSent, setCodeSent] = useState(false);
-  const [emailVerified, setEmailVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSignup(e: React.FormEvent) {
@@ -28,10 +25,6 @@ export default function SignupPage() {
     try {
       if (!email) {
         setError("이메일을 입력해주세요.");
-        return;
-      }
-      if (!emailVerified) {
-        setError("이메일 인증을 먼저 완료해 주세요.");
         return;
       }
       if (!password || password.length < 8) {
@@ -55,56 +48,7 @@ export default function SignupPage() {
     }
   }
 
-  async function handleSendCode() {
-    setError(null);
-    setMessage(null);
-    setLoading(true);
-    try {
-      if (!email) {
-        setError("이메일을 입력해주세요.");
-        return;
-      }
-
-      const res = await sendEmailCode(email);
-      if (!res.success) {
-        setError(res.error ?? "인증 코드 전송에 실패했습니다.");
-        return;
-      }
-
-      setCodeSent(true);
-      setMessage("인증 코드가 전송되었습니다. 이메일을 확인하세요.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function handleVerifyCode(e?: React.FormEvent) {
-    if (e) e.preventDefault();
-    setError(null);
-    setMessage(null);
-    setLoading(true);
-    try {
-      if (!email) {
-        setError("이메일을 입력해주세요.");
-        return;
-      }
-      if (!code) {
-        setError("인증 코드를 입력해주세요.");
-        return;
-      }
-
-      const { user, error: verifyError } = await verifyEmailCode(email, code);
-      if (verifyError) {
-        setError(verifyError as string);
-        return;
-      }
-
-      setEmailVerified(true);
-      setMessage("이메일 인증이 완료되었습니다. 비밀번호를 설정하고 회원가입을 진행하세요.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  // No email verification flow in development: users sign up with email+password directly.
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
