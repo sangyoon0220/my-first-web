@@ -20,6 +20,10 @@ export default function Header() {
   const [currentPwd, setCurrentPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
+  const [showConfirmInput, setShowConfirmInput] = useState(false);
+  const [confirmInput, setConfirmInput] = useState("");
+  const [tempPwd, setTempPwd] = useState<string | null>(null);
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
   const [panelLoading, setPanelLoading] = useState(false);
 
@@ -154,15 +158,46 @@ export default function Header() {
                     <div className="mb-2">
                       <label className="text-sm text-foreground">비밀번호</label>
                       <div className="flex items-center gap-2">
-                        <span className="flex-1 text-sm">********</span>
-                        <button
-                          onMouseDown={() => setShowPassword(true)}
-                          onMouseUp={() => setShowPassword(false)}
-                          onMouseLeave={() => setShowPassword(false)}
-                          className="px-2 py-1 bg-gray-200 rounded text-xs"
-                        >
-                          비밀번호 확인
-                        </button>
+                        <span className="flex-1 text-sm">{showPassword && tempPwd ? tempPwd : '********'}</span>
+                        {!tempPwd ? (
+                          showConfirmInput ? (
+                            <div className="flex gap-2">
+                              <Input type="password" placeholder="현재 비밀번호" value={confirmInput} onChange={(e) => setConfirmInput(e.target.value)} />
+                              <button
+                                onClick={async () => {
+                                  setConfirmLoading(true);
+                                  setStatusMsg(null);
+                                  try {
+                                    const { user: signed, error } = await signInWithEmail(user.email!, confirmInput);
+                                    if (error) {
+                                      setStatusMsg('비밀번호가 일치하지 않습니다.');
+                                    } else {
+                                      setTempPwd(confirmInput);
+                                      setShowConfirmInput(false);
+                                      setConfirmInput('');
+                                      setStatusMsg('비밀번호 확인되었습니다. 눌러서 확인하세요.');
+                                    }
+                                  } finally {
+                                    setConfirmLoading(false);
+                                  }
+                                }}
+                                className="px-2 py-1 bg-gray-200 rounded text-xs"
+                              >확인</button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => setShowConfirmInput(true)}
+                              className="px-2 py-1 bg-gray-200 rounded text-xs"
+                            >비밀번호 확인</button>
+                          )
+                        ) : (
+                          <button
+                            onMouseDown={() => setShowPassword(true)}
+                            onMouseUp={() => setShowPassword(false)}
+                            onMouseLeave={() => setShowPassword(false)}
+                            className="px-2 py-1 bg-gray-200 rounded text-xs"
+                          >비밀번호 확인</button>
+                        )}
                       </div>
                     </div>
                     {!showChangePwd ? (
