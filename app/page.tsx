@@ -79,9 +79,9 @@ export default function Home() {
             <li>2025-03-05 | 신입생 오리엔테이션 자료</li>
             <li>2025-02-28 | 학과 사무실 운영 시간 안내</li>
           </ul>
-          <Link href="/notices" className="inline-block mt-4 text-sm text-blue-700 hover:underline">
+          <a href="https://www.hs.ac.kr/kor/10505/subview.do" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-sm text-blue-700 hover:underline">
             공지사항 전체 보기
-          </Link>
+          </a>
         </div>
 
         <div className="rounded-2xl border-2 border-lime-300 bg-white p-6 shadow-md text-blue-950">
