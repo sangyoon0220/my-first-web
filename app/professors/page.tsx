@@ -12,7 +12,7 @@ export default function ProfessorsPage() {
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4 bg-card rounded-lg flex gap-3">
-            <img src="/images/professors/yoon_geon.svg" alt="윤건" className="w-28 h-28 object-cover rounded" />
+            <img src="/images/professors/yoon_geon.jpg" alt="윤건" className="w-28 h-28 object-cover rounded" />
             <div>
               <p className="font-bold">윤건</p>
               <p className="text-sm">부교수 · 학과장 — 공공관리·데이터기반행정</p>
@@ -22,7 +22,7 @@ export default function ProfessorsPage() {
           </div>
 
           <div className="p-4 bg-card rounded-lg flex gap-3">
-            <img src="/images/professors/lee_seokmin.svg" alt="이석민" className="w-28 h-28 object-cover rounded" />
+            <img src="/images/professors/lee_seokmin.jpg" alt="이석민" className="w-28 h-28 object-cover rounded" />
             <div>
               <p className="font-bold">이석민</p>
               <p className="text-sm">부교수 — 정책분석평가·공공빅데이터분석</p>
@@ -32,7 +32,7 @@ export default function ProfessorsPage() {
           </div>
 
           <div className="p-4 bg-card rounded-lg flex gap-3">
-            <img src="/images/professors/no_seungchul.svg" alt="노승철" className="w-28 h-28 object-cover rounded" />
+            <img src="/images/professors/no_seungchul.jpg" alt="노승철" className="w-28 h-28 object-cover rounded" />
             <div>
               <p className="font-bold">노승철</p>
               <p className="text-sm">부교수 — 빅데이터분석·GIS</p>
