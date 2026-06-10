@@ -9,6 +9,9 @@ export default function StudentCouncilSixPage() {
         </div>
         <h1 className="text-3xl font-black mb-4">6대 학생회 소개</h1>
         <p className="text-blue-900/85 leading-7">
+          공공인재빅데이터융합학 6대 학생회 두들입니다.
+        </p>
+        <p className="text-blue-900/85 leading-7 mt-2">
           6대 학생회의 운영 목표, 주요 공약, 행사 기획 및 학우 소통 계획을 안내합니다.
           공지사항과 활동 기록은 지속적으로 업데이트됩니다.
         </p>
