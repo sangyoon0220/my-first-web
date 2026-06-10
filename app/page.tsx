@@ -15,7 +15,7 @@ export default function Home() {
         </h1>
         <p className="text-sm md:text-base text-blue-900/70">학과 안내 메뉴를 선택하여 자세한 정보를 확인하세요.</p>
 
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
           <Link
             href="/intro"
             className="text-center px-5 py-4 text-base rounded-xl border border-blue-900 bg-blue-950 text-lime-100 font-bold hover:bg-blue-900 hover:-translate-y-0.5 transition"
