@@ -28,13 +28,7 @@ export default function Home() {
           >
             교수진
           </Link>
-          <Link
-            href="/leaders"
-            className="text-center px-5 py-4 text-base rounded-xl border border-blue-900 bg-blue-950 text-lime-100 font-bold hover:bg-blue-900 hover:-translate-y-0.5 transition"
-          >
-            역대 학생회
-          </Link>
-          <Link
+<Link
             href="/student-council-6"
             className="text-center px-5 py-4 text-base rounded-xl border border-lime-300 bg-lime-400 text-blue-950 font-bold hover:bg-lime-300 hover:-translate-y-0.5 transition"
           >
